@@ -15,15 +15,17 @@ class Book {
   
   // Methods
   getInfo() {
-    return `Title: ${this.#title} Author: ${this.#author} ISBN: ${this.#isbn}`
+    return `"${this.#title}" by ${this.#author} ISBN: ${this.#isbn}`
   }
   
   borrowBook() {
     this.#available = false;
+    return `You have borrowed the book ${getInfo()}`;
   }
   
   returnBook() {
     this.#available = true;
+    return `You have returned the book ${getInfo()}`;
   }
 
   isAvailable() {
@@ -31,8 +33,8 @@ class Book {
   }
 }
 
-class Ebook extends Book {
-  // Properties
+class EBook extends Book {
+  // Additonal Properties
   #fileSize;
 
   // Constructor
@@ -43,6 +45,17 @@ class Ebook extends Book {
 
   // Methods
   getInfo() {
-    return `${super.getInfo()} File Size (MB): ${this.#fileSize}`
+    return `${super.getInfo()} File Size (MB): ${this.#fileSize}`;
+  }
+}
+
+class PrintedBook extends Book {
+  // Additional Properties
+  #numPages;
+
+  // Constructor
+  constructor(title, author, isbn, numPages) {
+    super(title, author, isbn);
+    this.#numPages = numPages;
   }
 }
