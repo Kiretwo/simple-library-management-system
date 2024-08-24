@@ -58,4 +58,32 @@ class PrintedBook extends Book {
     super(title, author, isbn);
     this.#numPages = numPages;
   }
+
+  // Methods
+  getInfo() {
+    return `${super.getInfo()} Pages: ${this.#numPages}`;
+  }
 }
+
+class LibraryMember {
+  // Properties
+  #name;
+  #memberId;
+  #borrowedBooks;
+
+  // Constructor
+  constructor(name, memberId) {
+    this.#name = name;
+    this.#memberId = memberId;
+    this.#borrowedBooks = []; // Initialize the array to store borrowed books
+  }
+
+  // Methods
+  borrowBook(book) {
+    if (book.isAvailable()) {
+      
+    }
+  }
+}
+
+
