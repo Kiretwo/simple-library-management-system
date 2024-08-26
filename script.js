@@ -107,6 +107,22 @@ class LibraryMember {
   }
 }
 
+class Library {
+  // Properties
+  #books;
+  #members;
+
+  // Constructor
+  constructor() {
+    this.#books = [];
+    this.#members = [];
+  }
+
+  // Methods
+  addBook(book) {
+    this.#books.push(book); // Adds book to library array
+  }
+}
 
 // Testing
 const printedBook1 = new PrintedBook("Javascript for Dummies", "John Wick", 1203415910456, 468);
@@ -125,3 +141,8 @@ console.log(member2.borrowBook(eBook1));
 console.log(member2.getBorrowedBooks());
 console.log(member2.returnBook(printedBook1));
 console.log(member2.getBorrowedBooks());
+
+const library = new Library();
+library.addBook(printedBook1);
+library.addBook(eBook1);
+console.log(library);
