@@ -86,16 +86,42 @@ class LibraryMember {
       return `Sorry, this book is currently unavailable`;
     }
   }
+
+  returnBook(book) {
+    const bookIndex = this.#borrowedBooks.indexOf(book);
+    if (bookIndex > -1) {
+      this.#borrowedBooks.splice(bookIndex, 1); // Removes the book from the array
+      book.returnBook(); // Runs the function and marks book as returned
+      return `Book returned successfully: ${book.getInfo()}`;
+    } else {
+      return `This book has not been borrowed: ${book.getInfo()}`;
+    }
+  }
+
+  getBorrowedBooks() {
+    if (this.#borrowedBooks.length === 0) {
+      return `No books borrowed`;
+    } else {
+      return this.#borrowedBooks.map(book => book.getInfo()); // Returns detailed info about each borrowed book
+    }
+  }
 }
 
 
 // Testing
 const printedBook1 = new PrintedBook("Javascript for Dummies", "John Wick", 1203415910456, 468);
+const eBook1 = new EBook("Wtf is a Kilometer", "George Washington", 1937583295845, 10);
 console.log(printedBook1.getInfo());
 console.log(printedBook1.isAvailable());
 
 const member1 = new LibraryMember("Alice", 1);
 console.log(member1.borrowBook(printedBook1));
+console.log(member1.returnBook(printedBook1));
+console.log(member1.getBorrowedBooks());
 
 const member2 = new LibraryMember("Bob", 2);
 console.log(member2.borrowBook(printedBook1));
+console.log(member2.borrowBook(eBook1));
+console.log(member2.getBorrowedBooks());
+console.log(member2.returnBook(printedBook1));
+console.log(member2.getBorrowedBooks());
