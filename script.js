@@ -15,17 +15,15 @@ class Book {
   
   // Methods
   getInfo() {
-    return `"${this.#title}" by ${this.#author} ISBN: ${this.#isbn}`
+    return `"${this.#title}" by ${this.#author} (ISBN:${this.#isbn})`
   }
   
   borrowBook() {
     this.#available = false;
-    return `You have borrowed the book ${getInfo()}`;
   }
   
   returnBook() {
     this.#available = true;
-    return `You have returned the book ${getInfo()}`;
   }
 
   isAvailable() {
@@ -45,7 +43,7 @@ class EBook extends Book {
 
   // Methods
   getInfo() {
-    return `${super.getInfo()} File Size (MB): ${this.#fileSize}`;
+    return `${super.getInfo()}, File Size (MB): ${this.#fileSize}`;
   }
 }
 
@@ -61,7 +59,7 @@ class PrintedBook extends Book {
 
   // Methods
   getInfo() {
-    return `${super.getInfo()} Pages: ${this.#numPages}`;
+    return `${super.getInfo()}, Pages: ${this.#numPages}`;
   }
 }
 
@@ -81,9 +79,23 @@ class LibraryMember {
   // Methods
   borrowBook(book) {
     if (book.isAvailable()) {
-      
+      this.#borrowedBooks.push(book); // Add the book to the array
+      book.borrowBook(); // Runs the function and marks book as borrowed
+      return `Book borrowed successfully: ${book.getInfo()}`;
+    } else {
+      return `Sorry, this book is currently unavailable`;
     }
   }
 }
 
 
+// Testing
+const printedBook1 = new PrintedBook("Javascript for Dummies", "John Wick", 1203415910456, 468);
+console.log(printedBook1.getInfo());
+console.log(printedBook1.isAvailable());
+
+const member1 = new LibraryMember("Alice", 1);
+console.log(member1.borrowBook(printedBook1));
+
+const member2 = new LibraryMember("Bob", 2);
+console.log(member2.borrowBook(printedBook1));
