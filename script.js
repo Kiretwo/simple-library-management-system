@@ -172,7 +172,7 @@ getAvailableBooks() {
 
 // Testing
 const printedBook1 = new PrintedBook("Javascript for Dummies", "John Wick", 1203415910456, 468);
-const eBook1 = new EBook("Wtf is a Kilometer", "George Washington", 1937583295845, 10);
+const eBook1 = new EBook("Wtf is a Kilometer?", "George Washington", 1937583295845, 10);
 console.log(printedBook1.getInfo());
 console.log(printedBook1.isAvailable());
 
