@@ -77,6 +77,10 @@ class LibraryMember {
   }
 
   // Methods
+  getMemberId() {
+    return this.#memberId;
+  }
+
   borrowBook(book) {
     if (book.isAvailable()) {
       this.#borrowedBooks.push(book); // Add the book to the array
@@ -120,8 +124,50 @@ class Library {
 
   // Methods
   addBook(book) {
-    this.#books.push(book); // Adds book to library array
+    this.#books.push(book); // Adds book to library
   }
+
+  addMember(member) {
+    this.#members.push(member); // Adds a member to the library
+  }
+
+  findBookByTitle(title) {
+    return this.#books.find(book => book.getInfo().includes(title));
+  }
+
+  findMemberById(memberId) {
+    return this.#members.find(member => member.getMemberId() === memberId)
+  }
+
+  borrowBook(memberId, title) {
+    const member = this.findMemberById(memberId);
+    const book = this.findBookByTitle(title);
+
+    if (member && book) {
+        return member.borrowBook(book);
+    } else if (!member) {
+        return `Member with ID ${memberId} not found.`;
+    } else if (!book) {
+        return `Book with title "${title}" not found.`;
+    }
+}
+
+returnBook(memberId, title) {
+    const member = this.findMemberById(memberId);
+    const book = this.findBookByTitle(title);
+
+    if (member && book) {
+        return member.returnBook(book);
+    } else if (!member) {
+        return `Member with ID ${memberId} not found.`;
+    } else if (!book) {
+        return `Book with title "${title}" not found.`;
+    }
+}
+
+getAvailableBooks() {
+    return this.#books.filter(book => book.isAvailable()).map(book => book.getInfo());
+}
 }
 
 // Testing
@@ -145,4 +191,7 @@ console.log(member2.getBorrowedBooks());
 const library = new Library();
 library.addBook(printedBook1);
 library.addBook(eBook1);
+library.addMember(member1);
 console.log(library);
+console.log(library.findBookByTitle("Wtf"));
+console.log(library.findMemberById(1));
