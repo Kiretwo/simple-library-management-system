@@ -15,7 +15,7 @@ class Book {
   
   // Methods
   getInfo() {
-    return `"${this.#title}" by ${this.#author} (ISBN:${this.#isbn})`
+    return `"${this.#title}" by ${this.#author} (ISBN:${this.#isbn})`;
   }
   
   borrowBook() {
@@ -43,7 +43,7 @@ class EBook extends Book {
 
   // Methods
   getInfo() {
-    return `${super.getInfo()}, File Size (MB): ${this.#fileSize}`;
+    return `${super.getInfo()}, File Size: ${this.#fileSize}MB`;
   }
 }
 
